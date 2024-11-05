@@ -25,6 +25,8 @@ public class StrawMovement : MonoBehaviour
 
             if (pathPosition == LevelManager.main.path.Length)
             {
+                LevelManager.main.RegisterStrawAtEnd();
+
                 StrawSpawner.onStrawDestroy.Invoke();//call to destroy enemies
                 Destroy(gameObject);
                 return;//means it hit the end
