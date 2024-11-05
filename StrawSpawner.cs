@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
+using UnityEngine.UI;
 
 public class StrawSpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] strawPrefabs;
+    [SerializeField] private AudioClip waveStartSound;
+    [SerializeField] private AudioClip waveEndSound;
+    [SerializeField] private Text roundCounterText;
 
     [Header("Attributes")]
     [SerializeField] private int baseStraws = 8;
@@ -53,6 +58,7 @@ public class StrawSpawner : MonoBehaviour
 
         if (strawsAlive == 0 && strawsLeftToSpawn == 0)
         {
+            AudioSource.PlayClipAtPoint(waveEndSound, transform.position, 3f);
             EndWave();//end wave if both are 0, means all destroyed and none left to spawn
         }
     }
@@ -60,10 +66,16 @@ public class StrawSpawner : MonoBehaviour
     private IEnumerator StartWave()
     {
         yield return new WaitForSeconds(timeBetweenWaves);
+        AudioSource.PlayClipAtPoint(waveStartSound, transform.position, 1f);
 
         isSpawning = true;
         strawsLeftToSpawn = StrawsPerWave();
         eps = strawsPerSecond;//wait for specific time between waves, start spawning
+
+        if (roundCounterText != null)
+        {
+            roundCounterText.text = "Round: " + currentWave;
+        }
     }
 
     private void StrawDestroyed()
@@ -73,6 +85,7 @@ public class StrawSpawner : MonoBehaviour
 
     private void EndWave()
     {
+     
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;//set values to what they should be when the wave is done and then start a new wave
