@@ -1,0 +1,30 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Mm]emoryCaptures/
+[Aa]ssets/AddressableAssetsData/
+
+# Asset metadata
+*.meta
+
+# Unity auto-generated files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
